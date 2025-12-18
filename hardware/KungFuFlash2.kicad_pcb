@@ -4873,7 +4873,7 @@
     (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp ded18b43-c0b2-4f8b-8559-36d7daa47897))
   (gr_line (start 133.9215 122.047) (end 133.4135 121.539)
     (stroke (width 0.15) (type solid)) (layer "Edge.Cuts") (tstamp f21f6007-62fe-4d4e-95e5-0c33cfb04d3e))
-  (gr_text "github.com/KimJorgensen/KungFuFlash2" (at 96.012 119.888) (layer "F.SilkS") (tstamp 00000000-0000-0000-0000-00005df649ee)
+  (gr_text "codeberg.org/KimJorgensen/KungFuFlash2" (at 96.012 119.888) (layer "F.SilkS") (tstamp 00000000-0000-0000-0000-00005df649ee)
     (effects (font (size 1.5 1) (thickness 0.25)))
   )
   (gr_text "CLK" (at 130.429 105.537) (layer "F.SilkS") (tstamp 00000000-0000-0000-0000-00005df64fbc)
