@@ -217,7 +217,7 @@ static void c64_wait_valid_clock(void)
     while (cfg_file.boot_type != CFG_DIAG && valid_clock_count < 100)
     {
         // NTSC: 271-272, PAL: 282-283
-        if (!(TIM1->SR & TIM_SR_CC1IF) || TIM1->CCR1 < 270 || TIM1->CCR1 > 284)
+        if (!(TIM1->SR & TIM_SR_CC1IF) || TIM1->CCR1 < 270 || TIM1->CCR1 > 285)
         {
             valid_clock_count = 0;
         }
