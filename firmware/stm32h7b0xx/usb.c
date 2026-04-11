@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2024 Kim Jørgensen
+ * Copyright (c) 2019-2026 Kim Jørgensen
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -25,8 +25,6 @@
 #include "usb.h"
 #include "usb_cdc.h"
 #include "usb_hid.h"
-#include "hid_usage_desktop.h"
-#include "hid_usage_button.h"
 
 #define PLATFORMIO
 #define USBD_SOF_DISABLED
@@ -193,6 +191,14 @@ static struct usb_cdc_line_coding cdc_line = {
     .bDataBits          = 8,
 };
 
+// Baud rate that will reset the Kung Fu Flash and start the menu
+#define USB_MAGIC_BAUD_RATE_RESET   1200
+
+static inline bool usb_reset_requested(void)
+{
+    return cdc_line.dwDTERate == USB_MAGIC_BAUD_RATE_RESET;
+}
+
 static usbd_respond cdc_getdesc(usbd_ctlreq *req, void **address, u16 *length) {
     const u8 dtype = req->wValue >> 8;
     const u8 dnumber = req->wValue & 0xFF;
@@ -264,8 +270,13 @@ static void usb_putc(char ch)
     utx_wait = false;
 }
 
-static inline bool usb_gotc(void)
+static bool usb_gotc(void)
 {
+    if (usb_reset_requested())
+    {
+        restart_to_menu();
+    }
+
     return urx_pos > 0;
 }
 
