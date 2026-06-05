@@ -366,7 +366,7 @@ static void cdc_init_usbd(void) {
     usbd_reg_descr(&udev, cdc_getdesc);
 }
 
-void OTG_HS_IRQHandler(void)
+IRQ_HANDLER OTG_HS_IRQHandler(void)
 {
     usbd_poll(&udev);
 }

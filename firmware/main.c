@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2024 Kim Jørgensen
+ * Copyright (c) 2019-2026 Kim Jørgensen
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -26,6 +26,7 @@
 #include "commands.h"
 #include "file_types.h"
 #include "memory.c"
+#include "runtime.c"
 #include "hal.c"
 #include "print.c"
 #include "filesystem.c"
@@ -37,6 +38,7 @@
 #include "disk_drive.c"
 #include "eapi.c"
 #include "diagnostic.c"
+#include "fatfs.c"
 
 int main(void)
 {

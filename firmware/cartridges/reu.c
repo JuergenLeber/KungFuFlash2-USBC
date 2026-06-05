@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2024 Kim Jørgensen
+ * Copyright (c) 2019-2026 Kim Jørgensen
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -66,14 +66,14 @@ typedef struct
 #define REU         ((REU_REGISTERS *)REU_REG)
 #define REU_SHADOW  ((REU_REGISTERS *)REU_REG_SHADOW)
 
-static void reu_handler(void);
+void reu_handler(void);
 
-static void reu_read_dma_handler(void);
-static void reu_write_dma_handler(void);
-static void reu_swap_dma_handler(void);
-static void reu_swap2_dma_handler(void);
-static void reu_verify_dma_handler(void);
-static void reu_verify_error_dma_handler(void);
+void reu_read_dma_handler(void);
+void reu_write_dma_handler(void);
+void reu_swap_dma_handler(void);
+void reu_swap2_dma_handler(void);
+void reu_verify_dma_handler(void);
+void reu_verify_error_dma_handler(void);
 
 static void (* const reu_handlers[4])(void) =
 {

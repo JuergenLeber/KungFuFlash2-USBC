@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2024 Kim Jørgensen
+ * Copyright (c) 2019-2026 Kim Jørgensen
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -150,7 +150,7 @@ static void kff_init(void)
     kff_set_command(CMD_NONE);
 }
 
-static void kff_reu_handler(void);
+void kff_reu_handler(void);
 
 static void kff_reu_init(void)
 {

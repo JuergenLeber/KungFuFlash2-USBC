@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2024 Kim Jørgensen
+ * Copyright (c) 2019-2026 Kim Jørgensen
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -172,7 +172,7 @@ static void c64_clock_config()
 static volatile u32 diag_state;
 static volatile u32 diag_phi2_freq;
 
-static void c64_diag_handler(void)
+EXPORT void c64_diag_handler(void)
 {
     if (diag_state == DIAG_RUN)
     {
@@ -388,7 +388,7 @@ static inline bool special_button_pressed(void)
     return (button_pressed() & SPECIAL_BTN) != 0;
 }
 
-void EXTI9_5_IRQHandler(void)
+IRQ_HANDLER EXTI9_5_IRQHandler(void)
 {
     // Menu button pressed
     if (EXTI->PR1 & EXTI_PR1_PR7)

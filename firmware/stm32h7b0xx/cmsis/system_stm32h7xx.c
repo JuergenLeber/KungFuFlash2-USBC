@@ -172,7 +172,7 @@
   * @param  None
   * @retval None
   */
-void SystemInit (void)
+__attribute__((externally_visible)) void SystemInit (void)
 {
 #if defined (DATA_IN_D2_SRAM)
  __IO uint32_t tmpreg;
