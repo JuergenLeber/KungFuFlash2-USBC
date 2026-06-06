@@ -98,7 +98,7 @@ C_INCLUDES =  \
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
 
-CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fomit-frame-pointer -fdata-sections -ffunction-sections -ffreestanding -Wno-unused-function
+CFLAGS = $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fsingle-precision-constant -fomit-frame-pointer -fdata-sections -ffunction-sections -ffreestanding -Wno-unused-function
 
 ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2

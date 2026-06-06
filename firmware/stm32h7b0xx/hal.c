@@ -221,11 +221,21 @@ static void fpu_config(void)
 /******************************************************************************
 * Debug cycle counter
 ******************************************************************************/
+static inline void cyccnt_timer_start(void)
+{
+    DWT->CYCCNT = 0;
+}
+
+static inline bool cyccnt_timer_elapsed_ms(u32 ms)
+{
+    return DWT->CYCCNT >= 280000 * ms;
+}
+
 static void dwt_cyccnt_config(void)
 {
     // Enable DWT
     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-    DWT->CYCCNT = 0;
+    cyccnt_timer_start();
 
     // Enable CPU cycle counter
     DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;

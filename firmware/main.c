@@ -25,10 +25,11 @@
 #include "common.h"
 #include "commands.h"
 #include "file_types.h"
-#include "memory.c"
 #include "runtime.c"
+#include "memory.c"
 #include "hal.c"
 #include "print.c"
+#include "fatfs.c"
 #include "filesystem.c"
 #include "file_types.c"
 #include "cartridge.c"
@@ -38,7 +39,6 @@
 #include "disk_drive.c"
 #include "eapi.c"
 #include "diagnostic.c"
-#include "fatfs.c"
 
 int main(void)
 {
