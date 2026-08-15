@@ -239,7 +239,7 @@
       "internal_id": "",
       "mfg": "",
       "mpn": "",
-      "sch_revision": ""
+      "sch_revision": "2"
     },
     "layer_pairs": [],
     "layer_presets": [],
@@ -979,7 +979,7 @@
       {
         "filename": "KungFuFlash2.kicad_sch",
         "name": "KungFuFlash2",
-        "uuid": "00000000-0000-0000-0000-000000000000"
+        "uuid": "900d3ff0-0a04-4b16-beae-b4a6786432f6"
       }
     ],
     "used_designators": "",
@@ -988,7 +988,7 @@
   "sheets": [
     [
       "900d3ff0-0a04-4b16-beae-b4a6786432f6",
-      ""
+      "KungFuFlash2"
     ]
   ],
   "text_variables": {},
