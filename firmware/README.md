@@ -5,7 +5,7 @@ The Kung Fu Flash 2 cartridge should not be connected to the Commodore 64 before
 ## SWD (Recommended)
 Connect the ST-Link V2 programmer to J1 (3.3V, GND, SWDIO, and SWCLK) and connect BOOT0 to 3.3V.
 
-Rename the `KungFuFlash_v2.xx.upd` file to `KungFuFlash_v2.xx.bin` and use the STM32CubeProgrammer from ST to program the firmware.
+Rename the `KungFuFlash2_v2.xx.upd` file to `KungFuFlash2_v2.xx.bin` and use the STM32CubeProgrammer from ST to program the firmware.
 
 All wires to J1 should be disconnected once the firmware has been successfully installed.
 
@@ -14,7 +14,7 @@ Add a jumper to short BOOT0 and +3.3V on J1. This will ensure that the board is 
 
 Use [dfu-util](http://dfu-util.sourceforge.net/) to install the firmware:
 
-`dfu-util -a 0 -s 0x08000000 -D KungFuFlash_v2.xx.upd`
+`dfu-util -a 0 -s 0x08000000 -D KungFuFlash2_v2.xx.upd`
 
 The jumper should be removed after the firmware has been installed.
 

@@ -6,7 +6,7 @@ export version
 ######################################
 # target
 ######################################
-TARGET = KungFuFlash_v$(version)
+TARGET = KungFuFlash2_v$(version)
 
 LAUNCHER_DIR = ../launcher/
 LAUNCHER = $(LAUNCHER_DIR)build/KungFuLauncher_v$(version).bin
