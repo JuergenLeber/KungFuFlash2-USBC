@@ -37,3 +37,6 @@ build/
 # KiCad backup files
 hardware/KungFuFlash2-backups
 hardware/.history
+
+# Other files and directories
+.DS_Store
