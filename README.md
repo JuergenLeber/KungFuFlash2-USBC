@@ -127,7 +127,7 @@ and [EasyFlash 3 BBS](https://codeberg.org/KimJorgensen/KungFuFlash/src/branch/m
 ## Firmware Update
 
 Just place the KungFuFlash_v2.xx.upd file on the SD card and select the file in the launcher to initiate the firmware update.
-The newest firmware can be found [here](./releases).
+The newest firmware can be found [here](https://github.com/JuergenLeber/KungFuFlash2-USBC/releases).
 
 For initial firmware installation, [see here](firmware/README.md).
 
