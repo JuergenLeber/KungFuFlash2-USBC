@@ -1,6 +1,10 @@
-# Kung Fu Flash 2
+# Kung Fu Flash 2 USB-C
 
 Cartridge for the Commodore 64 that packs a punch.
+
+This repository is a fork of [KungFuFlash2-USBC](https://github.com/Sgw32/KungFuFlash2-USBC) which is a fork of an earlier version of [KungFuFlash2](https://codeberg.org/KimJorgensen/KungFuFlash2) from Kim Jørgensen that was later moved to Codeberg and is still being updated.
+
+To have the "best of both worlds" (USB-C and updated firmware) this repository merged both of them together and additionally introduces some small fixes to the PCB and the production files.
 
 Kung Fu Flash 2 is the big brother of [Kung Fu Flash](https://codeberg.org/KimJorgensen/KungFuFlash). It has a faster microcontroller with more memory and I/O pins, allowing for additional functionality.
 
@@ -21,12 +25,13 @@ There are three buttons on the cartridge; a reset button, a menu button for star
 
 ![Cartridge Case](pics/cartridge_case.jpg)
 
-The form factor is similar to Kung Fu Flash and it should be possible to use the same cartridge cases.
-It could be the Stumpy Cartridge Case from TFW8b or the 3D printed cartridge case designed by bigby, [see here](https://www.thingiverse.com/thing:4153414).
+A very nice case has been designed by [Bigby](https://www.printables.com/@Bigby) and can be found on [Printables](https://www.printables.com/model/119330-kung-fu-flash-cartridge-case).
 
 ![Kung Fu Flash 2 PCB](pics/pcb_prototype.jpg)
 
-The gerber files and BOM can be found [here](https://codeberg.org/KimJorgensen/KungFuFlash2/releases/tag/v2.00).
+(Picture shows the old version and will be updated as soon as the new prototypes arrive)
+
+The gerber files and BOM can be found [here](./hardware/gerber/).
 
 ## Supported Cartridges
 
@@ -69,8 +74,29 @@ The following file types are currently supported:
 * Disk image (D64, D71, D81)
 * Tape image (T64)
 * Program (PRG, P00)
+* SID tune (SID)
 * Firmware update (UPD)
 * Text document (TXT, NFO, 1ST)
+
+## SID Playback
+
+SID tunes can be played directly from the launcher. This feature is inherited from the
+[KungFuFlash2-USBC](https://github.com/Sgw32/KungFuFlash2-USBC) fork and is not part of the original Kung Fu Flash 2.
+
+Selecting a SID file in the file options menu offers two actions:
+
+* "Play" (RETURN) converts the tune and starts it immediately
+* "Convert to PRG" (SHIFT+RETURN) writes a PRG file next to the SID file and returns to the launcher
+
+In both cases the tune is converted to a PRG containing a small BASIC starter and a raster interrupt player,
+so the resulting file can also be used on any other C64 setup. As the PRG is written to the microSD card,
+the card must not be write protected.
+
+PSID and RSID files of version 1 to 3 are supported, with these limitations:
+
+* Only the first subtune is played; the tune and subtune information from the SID header is ignored
+* The player uses a single speed raster interrupt, so multi speed tunes will play at the wrong tempo
+* Tunes that load below $0843 cannot be converted, as this area is occupied by the BASIC starter and the player
 
 ## REU Emulation
 
@@ -101,7 +127,7 @@ and [EasyFlash 3 BBS](https://codeberg.org/KimJorgensen/KungFuFlash/src/branch/m
 ## Firmware Update
 
 Just place the KungFuFlash_v2.xx.upd file on the SD card and select the file in the launcher to initiate the firmware update.
-The newest firmware can be found [here](https://codeberg.org/KimJorgensen/KungFuFlash2/releases/).
+The newest firmware can be found [here](./releases).
 
 For initial firmware installation, [see here](firmware/README.md).
 
