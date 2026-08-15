@@ -34,5 +34,6 @@ build/
 *.out
 *.app
 
-# KiCad Backup files
+# KiCad backup files
 hardware/KungFuFlash2-backups
+hardware/.history
