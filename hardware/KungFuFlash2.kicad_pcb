@@ -9,8 +9,8 @@
 	(paper "A4")
 	(title_block
 		(title "Kung Fu Flash 2")
-		(date "2023-12-26")
-		(rev "1")
+		(date "2026-08-15")
+		(rev "2")
 	)
 	(layers
 		(0 "F.Cu" signal)
