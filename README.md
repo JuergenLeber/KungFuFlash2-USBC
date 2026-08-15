@@ -2,7 +2,7 @@
 
 Cartridge for the Commodore 64 that packs a punch.
 
-Kung Fu Flash 2 is the big brother of [Kung Fu Flash](https://github.com/KimJorgensen/KungFuFlash). It has a faster microcontroller with more memory and I/O pins, allowing for additional functionality.
+Kung Fu Flash 2 is the big brother of [Kung Fu Flash](https://codeberg.org/KimJorgensen/KungFuFlash). It has a faster microcontroller with more memory and I/O pins, allowing for additional functionality.
 
 **Currently, this project is considered experimental** and provides the same features as Kung Fu Flash, with these notable exceptions:
 
@@ -26,7 +26,7 @@ It could be the Stumpy Cartridge Case from TFW8b or the 3D printed cartridge cas
 
 ![Kung Fu Flash 2 PCB](pics/pcb_prototype.jpg)
 
-The gerber files and BOM can be found [here](https://github.com/KimJorgensen/KungFuFlash2/releases/tag/v2.00).
+The gerber files and BOM can be found [here](https://codeberg.org/KimJorgensen/KungFuFlash2/releases/tag/v2.00).
 
 ## Supported Cartridges
 
@@ -95,13 +95,13 @@ The USB port is active when:
 Kung Fu Flash 2 shows up as a standard serial port when connected to a PC not requiring any custom drivers to be installed.
 This means, however, that the EasyFlash 3 program on the PC side must be modified to support Kung Fu Flash.
 
-The repository of the original Kung Fu Flash contains a modified version of [EasyFlash 3 USB Utilities](https://github.com/KimJorgensen/KungFuFlash/tree/master/3rd_party/ef3utils)
-and [EasyFlash 3 BBS](https://github.com/KimJorgensen/KungFuFlash/tree/master/3rd_party/ef3bbs) which will also work with the Kung Fu Flash 2.
+The repository of the original Kung Fu Flash contains a modified version of [EasyFlash 3 USB Utilities](https://codeberg.org/KimJorgensen/KungFuFlash/src/branch/master/3rd_party/ef3utils)
+and [EasyFlash 3 BBS](https://codeberg.org/KimJorgensen/KungFuFlash/src/branch/master/3rd_party/ef3bbs) which will also work with the Kung Fu Flash 2.
 
 ## Firmware Update
 
 Just place the KungFuFlash_v2.xx.upd file on the SD card and select the file in the launcher to initiate the firmware update.
-The newest firmware can be found [here](https://github.com/KimJorgensen/KungFuFlash2/releases/).
+The newest firmware can be found [here](https://codeberg.org/KimJorgensen/KungFuFlash2/releases/).
 
 For initial firmware installation, [see here](firmware/README.md).
 
@@ -123,7 +123,7 @@ Currently REL files are not supported and only a subset of the Commodore DOS com
 
 Kung Fu Flash 2 was based on or uses other open source projects:
 
-* [Kung Fu Flash](https://github.com/KimJorgensen/KungFuFlash)
+* [Kung Fu Flash](https://codeberg.org/KimJorgensen/KungFuFlash)
 * [EasyFlash 3](https://bitbucket.org/skoe/easyflash) by Thomas Giesel
 * [Draco Browser](https://csdb.dk/release/?id=89910) by Sascha Bader
 * [fatfs-stm32](https://github.com/colosimo/fatfs-stm32) by Aurelio Colosimo

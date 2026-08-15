@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2024 Kim Jørgensen
+ * Copyright (c) 2019-2026 Kim Jørgensen
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -221,11 +221,21 @@ static void fpu_config(void)
 /******************************************************************************
 * Debug cycle counter
 ******************************************************************************/
+static inline void cyccnt_timer_start(void)
+{
+    DWT->CYCCNT = 0;
+}
+
+static inline bool cyccnt_timer_elapsed_ms(u32 ms)
+{
+    return DWT->CYCCNT >= 280000 * ms;
+}
+
 static void dwt_cyccnt_config(void)
 {
     // Enable DWT
     CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-    DWT->CYCCNT = 0;
+    cyccnt_timer_start();
 
     // Enable CPU cycle counter
     DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
@@ -239,6 +249,11 @@ NO_RETURN system_restart(void)
     led_off();
 
     usart_wait_for_tx();
+
+    // Flush any incomplete DTCM ECC writes before system reset. See AN5342
+    volatile u8 *buf = (volatile u8 *)&crt_buf_header;
+    buf[0] = buf[0];
+    buf[4] = buf[4];
 
     NVIC_SystemReset();
     while (true);

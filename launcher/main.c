@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019-2025 Kim Jørgensen
+ * Copyright (c) 2019-2026 Kim Jørgensen
  *
  * This software is provided 'as-is', without any express or implied
  * warranty.  In no event will the authors be held liable for any damages
@@ -62,8 +62,12 @@ static void updateDir(uint8_t last_selected);
 static void printDirPage(void);
 static void printElement(uint8_t pos);
 
+static const char *kff_receive_text(uint16_t size);
 static const char *kff_read_text(void);
+static uint8_t kff_sync(void);
+static void showFrame(const char *title);
 static void showKFFMessage(uint8_t color);
+static void showKFFCancel(void);
 static void showMessage(const char *text, uint8_t color);
 
 /* definitions */
@@ -206,14 +210,19 @@ static void mainLoopKFF(void)
             case CMD_WARNING:
                 showKFFMessage(WARNC);
                 waitKey();
-                kff_wait_for_sync();
+                reply = kff_sync();
                 break;
 
             case CMD_FLASH_MESSAGE:
                 showKFFMessage(TEXTC);
                 textcolor(ERRORC);
                 cprintf("PLEASE DO NOT POWER OFF OR RESET");
-                kff_wait_for_sync();
+                reply = kff_sync();
+                break;
+
+            case CMD_CANCEL_MESSAGE:
+                showKFFCancel();
+                reply = kff_sync();
                 break;
 
             case CMD_TEXT:
@@ -224,7 +233,7 @@ static void mainLoopKFF(void)
                 cputsxy(cxy[1], cxy[2], text);
                 if (cmd == CMD_TEXT_WAIT)
                 {
-                    kff_wait_for_sync();
+                    reply = kff_sync();
                 }
                 break;
 
@@ -239,7 +248,7 @@ static void mainLoopKFF(void)
 
             case CMD_WAIT_SYNC:
                 clrscr();
-                kff_wait_for_sync();
+                reply = kff_sync();
                 break;
 
             case CMD_MOUNT_DISK:
@@ -260,20 +269,57 @@ static void mainLoopKFF(void)
     }
 }
 
-static const char *kff_read_text(void)
+static const char *kff_receive_text(uint16_t size)
 {
-    uint16_t size;
-    kff_receive_data(&size, 2);
     kff_receive_data(bigBuffer, size);
     bigBuffer[size] = 0;
 
     return bigBuffer;
 }
 
+static const char *kff_read_text(void)
+{
+    uint16_t size;
+    kff_receive_data(&size, 2);
+
+    return kff_receive_text(size);
+}
+
 static void showKFFMessage(uint8_t color)
 {
     const char *text = kff_read_text();
     showMessage(text, color);
+}
+
+static void showKFFCancel(void)
+{
+    const char *text = kff_receive_text(DIR_NAME_LENGTH);
+    sprintf(linebuffer, "%-39s ", text);
+    showFrame(linebuffer);
+
+    textcolor(TEXTC);
+    text = kff_read_text();
+    cputsxy(0, 3, text);
+
+    textcolor(ERRORC);
+    cputsxy(0, 5, "PLEASE DO NOT POWER OFF OR RESET");
+
+    revers(1);
+    textcolor(COLOR_PURPLE);
+    cputsxy(0, 11, "PRESS A KEY TO CANCEL");
+    revers(0);
+}
+
+static uint8_t kff_sync(void)
+{
+    kff_wait_for_sync();
+
+    if (kbhit() || joyhit())
+    {
+        return REPLY_CANCEL;
+    }
+
+    return REPLY_OK;
 }
 
 static void showTextPage(uint16_t page)
@@ -582,6 +628,10 @@ static uint8_t menuLoop(void)
                 help();
                 break;
 
+            case CH_F3:
+                reply = REPLY_UTILITIES;
+                break;
+
             case CH_FIRE_DOWN:
                 if (searchBuffer[0] && *dir->name != ' ')
                 {
@@ -589,7 +639,7 @@ static uint8_t menuLoop(void)
                 }
                 else
                 {
-                    help();
+                    reply = REPLY_UTILITIES;
                 }
                 break;
 
@@ -866,7 +916,7 @@ static void help(void)
     textcolor(BACKC);
     cputsxy(10, 1, "\xa3\xa3\xa3\xa3\xa3\xa3\xa3\xa3\xa3\xa3\xa3\xa3\xa3\xa3\xa3\xa3\xa3\xa3\xa3");
 
-    cputsxy(2, 2, "github.com/KimJorgensen/KungFuFlash2");
+    cputsxy(1, 2, "codeberg.org/KimJorgensen/KungFuFlash2");
 
     textcolor(TEXTC);
     cputsxy(0, 5, "<CRSR> or Joy       Change selection");
@@ -875,20 +925,20 @@ static void help(void)
     cputsxy(0, 8, "<HOME>              Root Dir");
     cputsxy(0, 9, "<DEL> or Fire left  Dir Up");
     cputsxy(0, 10, "<A-Z> or Fire up    Search");
-    cputsxy(0, 11, "<F1> or Fire down   Help");
-    cputsxy(0, 12, "<F5> or Fire right  Settings");
-    cputsxy(0, 13, "<F6>                C128 Mode");
-    cputsxy(0, 14, "<F7>                BASIC (Cart Active)");
-    cputsxy(0, 15, "<F8>                Kill");
-    cputsxy(0, 16, "<RUN/STOP>          Reset");
+    cputsxy(0, 11, "<F1>                Help");
+    cputsxy(0, 12, "<F3> or Fire down   Utilities");
+    cputsxy(0, 13, "<F5> or Fire right  Settings");
+    cputsxy(0, 14, "<F6>                C128 Mode");
+    cputsxy(0, 15, "<F7>                BASIC (Cart Active)");
+    cputsxy(0, 16, "<F8>                Kill");
+    cputsxy(0, 17, "<RUN/STOP>          Reset");
 
-    cputsxy(0, 18, "Use joystick in port 2");
+    cputsxy(0, 19, "Use joystick in port 2");
 
     textcolor(COLOR_RED);
-    cputsxy(0, 20, "KUNG FU FLASH IS PROVIDED WITH NO");
-    cputsxy(0, 21, "WARRANTY OF ANY KIND.");
+    cputsxy(0, 21, "KUNG FU FLASH COMES WITH NO WARRANTY.");
     textcolor(COLOR_LIGHTRED);
-    cputsxy(0, 22, "USE IT AT YOUR OWN RISK!");
+    cputsxy(0, 22, "USE AT YOUR OWN RISK!");
 
     gotoxy(0, 24);
     waitKey();
@@ -945,15 +995,20 @@ static void printElement(uint8_t element_no)
     revers(0);
 }
 
-static void showMessage(const char *text, uint8_t color)
+static void showFrame(const char *title)
 {
     clrscr();
 
     revers(1);
     textcolor(BACKC);
-    cputsxy(0, 0, "                                        ");
+    cputsxy(0, 0, title);
     cputsxy(0, BOTTOM, programBar);
     revers(0);
+}
+
+static void showMessage(const char *text, uint8_t color)
+{
+    showFrame("                                        ");
 
     textcolor(color);
     cputsxy(0, 3, text);
