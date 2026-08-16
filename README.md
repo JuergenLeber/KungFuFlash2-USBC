@@ -19,7 +19,7 @@ Kung Fu Flash 2 is the big brother of [Kung Fu Flash](https://codeberg.org/KimJo
 Kung Fu Flash 2 can emulate different cartridge types, load PRG files and use D64 disk images.
 Just place your desired CRT, PRG or D64 files on a FAT formatted microSD card and use the built-in launcher to execute them.
 
-## Hardware
+## Hardware (Rev. 2)
 
 There are three buttons on the cartridge; a reset button, a menu button for starting the launcher, and a special button that is used by the freezer cartridges.
 
@@ -27,9 +27,11 @@ There are three buttons on the cartridge; a reset button, a menu button for star
 
 A very nice case has been designed by [Bigby](https://www.printables.com/@Bigby) and can be found on [Printables](https://www.printables.com/model/119330-kung-fu-flash-cartridge-case).
 
-![Kung Fu Flash 2 PCB](pics/pcb_prototype.jpg)
+![Kung Fu Flash 2 PCB](pics/pcb_rev2.png)
 
-(Picture shows the old version and will be updated as soon as the new prototypes arrive)
+Changes in hardware revision 2 are a USB-C port (including resistors) instead of micro-USB and a different crystal.
+
+As all credits still go to Kim Jørgensen for this great cartridge, the PCB still shows his Codeberg URL.
 
 The gerber files and BOM can be found [here](./hardware/gerber/).
 
